@@ -13,7 +13,7 @@ class System
     for(int i = 0; i < pop; i++)
     {
       Vec2D temp = new Vec2D(random(-width/2,width/2),random(-height/2,height/2));
-      orgs.add(new Organism(temp, color(#ff0000), 4, 0.003, 0.25, 20, 0.05,100));
+      orgs.add(new Organism(temp, color(#ff0000), 2, 0.005, 0.25, 20, 0.05,50));
     }
   }
   
@@ -25,6 +25,7 @@ class System
       avg.addSelf(o.loc);
     }
     avg.scaleSelf(1./orgs.size());
+    println("average"+avg.x+", "+avg.y);
     for(int i = orgs.size()-1; i>=0; i--)
     {
       Organism o = orgs.get(i);
