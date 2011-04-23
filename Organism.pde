@@ -31,17 +31,24 @@ class Organism
   {
     Vec2D steer = new Vec2D();
     int count = 0;
-    for(Organism o : others)
+    for(int i = others.size()-1; i>=0; i--)
     {
-      if(loc.distanceToSquared(o.loc) < vision)
+      Organism other = others.get(i);
+      if(this != other)
       {
-        steer.addSelf(o.vel);
-        count++;
+        if(loc.distanceToSquared(other.loc) < vision)
+        {
+          steer.addSelf(other.vel);
+          count++;
+        }
       }
     }
     if(count > 0)
     {
       steer.scaleSelf(1.0/count);
+    }
+    if(steer.magSquared()>0)
+    { 
       steer.normalizeTo(alignment);
       steer.subSelf(vel);
     }
