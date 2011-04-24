@@ -7,9 +7,9 @@ class System
   float radius;
   float turbulence;
   
-  System(int pop, int _radius)
+  System(int pop, int _radius, float _turbulence)
   {
-    turbulence = .9;
+    turbulence = _turbulence;
     radius = _radius;
     avg = new Vec2D();
     offset = new Vec2D(1./3, 2./3);
@@ -34,10 +34,10 @@ class System
     for(int i = orgs.size()-1; i>=0; i--)
     {
       Organism o = orgs.get(i);
-      if( i < radius/100 )
-      {
-        randomOrg().reset();
-      }
+//      if( i < radius/1000 )
+//      {
+//        randomOrg().reset();
+//      }
       o.run(orgs);
     }
     

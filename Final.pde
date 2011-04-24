@@ -12,10 +12,10 @@ ToxiclibsSupport gfx;
 Vec2D cameraCenter;
 void setup()
 {
-  size(1280, 720, P3D);
+  size(1280, 720, OPENGL);
   smooth();
   background(0);
-  cam = new PeasyCam(this,1600);
+  cam = new PeasyCam(this,700);
   gfx=new ToxiclibsSupport(this);
   
   colors = new color[4];
@@ -24,7 +24,7 @@ void setup()
   colors[2] = color(255,255,255);
   colors[3] = color(231,233,29);
   
-  system = new System(500, 50);
+  system = new System(1000, 50, 1.6);
   cameraCenter = new Vec2D();
 }
 

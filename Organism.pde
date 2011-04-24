@@ -4,6 +4,7 @@ class Organism
   Vec2D vel;
   Vec2D acc;
   Vec2D[] tail;
+  Vec2D loffset;
   color c;
   float alignment;
   float clumping;
@@ -17,7 +18,7 @@ class Organism
   {
     loc = _loc;
     vel = Vec2D.randomVector();
-    tail = new Vec2D[10];
+    tail = new Vec2D[8];
     acc = new Vec2D(0, 0);
     c = _c;
     alignment = _alignment;
@@ -25,6 +26,7 @@ class Organism
     separation = _separation;
     speed = _speed;
     force = _force;
+    loffset = Vec2D.randomVector();
     age = 0;
     for (int i = 0; i< tail.length; i++)
     {
@@ -77,7 +79,9 @@ class Organism
   void movement(ArrayList others)
   {
     // Add a bit of randomness.
-    Vec2D offset = new Vec2D(random(-1, 1), random(-1, 1));
+    Vec2D offset = new Vec2D(
+    noise(loc.x/system.radius+system.offset.x+loffset.x*separation, loc.y/system.radius)-.5, 
+    noise(loc.x/system.radius, loc.y/system.radius+system.offset.y+loffset.y*separation)-.5);
     acc.addSelf(offset.scaleSelf(separation));
     applyCohesion();
     applyAlignment(others);
@@ -86,11 +90,11 @@ class Organism
   void render()
   {
 
-    //    point(loc.x, loc.y);
+    stroke(c, age);
+    strokeWeight(2);
+    point(loc.x, loc.y);
     for (int i = 0; i < tail.length; i++)
     {
-      stroke(c, age);
-      strokeWeight(2);
       point(tail[i].x, tail[i].y);
     }
   }
@@ -118,7 +122,7 @@ class Organism
     }
     else
     {
-      count++;
+       count++;
     }
     tail[count].set(loc);
 
