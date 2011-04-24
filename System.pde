@@ -17,7 +17,7 @@ class System
     for(int i = 0; i < pop; i++)
     {
       Vec2D temp = new Vec2D(random(-width/2,width/2),random(-height/2,height/2));
-      orgs.add(new Organism(temp, colors[(int)random(0,colors.length)], 2, 0.05, .95, 24, 0.05));
+      orgs.add(new Organism(temp, colors[(int)random(0,colors.length)], 2, 0.05, .95, 24, 0.09));
     }
   }
   

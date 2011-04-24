@@ -18,7 +18,7 @@ class Organism
   {
     loc = _loc;
     vel = Vec2D.randomVector();
-    tail = new Vec2D[8];
+    tail = new Vec2D[6];
     acc = new Vec2D(0, 0);
     c = _c;
     alignment = _alignment;
@@ -126,7 +126,7 @@ class Organism
     }
     tail[count].set(loc);
 
-    age = constrain(age+1, 30, 255);
+    age = constrain(age+1, 30, 205);
     acc.limit(force);
     vel.addSelf(acc);
     loc.addSelf(vel);
