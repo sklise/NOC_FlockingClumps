@@ -20,13 +20,13 @@ void setup()
   
   colors = new color[6];
   colors[0] = color(39,233,29);
-  colors[1] = color(29,233,216);
+  colors[1] = color(100,022,173);
   colors[2] = color(255,255,255);
   colors[3] = color(231,233,29);
   colors[4] = color(254,74,11);
   colors[5] = color(133,5,145);
   
-  system = new System(900, 50, 1.6);
+  system = new System(900, 80, 1.6);
   cameraCenter = new Vec2D();
 }
 
