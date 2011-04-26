@@ -17,7 +17,7 @@ class System
     for(int i = 0; i < pop; i++)
     {
       Vec2D temp = new Vec2D(random(-width/2,width/2),random(-height/2,height/2));
-      orgs.add(new Organism(temp, colors[(int)random(0,colors.length)], 1.3, 0.05, .95, 24, 0.05));
+      orgs.add(new Organism(temp, colors[(int)random(0,colors.length)], 1.75, 0.2, .55, 24, 0.05));
     }
   }
   
@@ -30,13 +30,12 @@ class System
     }
     avg.scaleSelf(1./orgs.size());
     
-    println("average"+avg.x+", "+avg.y+" OFFSET "+offset.x+", "+offset.y);
     for(int i = orgs.size()-1; i>=0; i--)
     {
       Organism o = orgs.get(i);
       if( i < radius/100 )
       {
-        //randomOrg().reset();
+        randomOrg().reset();
       }
       o.run(orgs);
     }

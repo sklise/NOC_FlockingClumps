@@ -82,6 +82,7 @@ class Organism
     Vec2D offset = new Vec2D(
     noise(loc.x/system.radius+system.offset.x+loffset.x*separation, loc.y/system.radius)-.5, 
     noise(loc.x/system.radius, loc.y/system.radius+system.offset.y+loffset.y*separation)-.5);
+    // Add the random movement
     acc.addSelf(offset.scaleSelf(separation));
     applyCohesion();
     applyAlignment(others);
@@ -89,23 +90,28 @@ class Organism
 
   void render()
   {
-
+    // Set the stroke opacity to the age of the organism.
     stroke(c, age);
     strokeWeight(2);
+    // Draw the current position
     point(loc.x, loc.y);
-    for (int i = 0; i < tail.length; i++)
-    {
-      point(tail[i].x, tail[i].y);
-    }
+    // Draw the tail
+    // for (int i = 0; i < tail.length; i++)
+    // {
+    //   point(tail[i].x, tail[i].y);
+    // }
   }
+
 
   void reset()
   {
     age = 0;
-    loc = Vec2D.randomVector();
-    loc.scaleSelf(random(system.radius));
+    loc.set(system.avg);
+    loc.addSelf(Vec2D.randomVector().scaleSelf(100));
   }
 
+  // run()
+  // the only command necessary to move and draw an Organism.
   void run(ArrayList others)
   {
     acc.clear();
@@ -116,21 +122,21 @@ class Organism
 
   void update()
   {
-    if (count == tail.length-1)
-    {
-      count = 0;
-    }
-    else
-    {
-       count++;
-    }
-    tail[count].set(loc);
-
-    age = constrain(age+1, 30, 205);
+    // Get to the next position in the tail.
+    //    if (count == tail.length-1) {
+    //      count = 0;
+    //    }
+    //    else {
+    //      count++;
+    //    }
+    //    tail[count].set(loc);
+    // increase the age of the organism
+    age = constrain(age+1, 30, 225);
+    // Limit acceleration, add to velocity, add to location.
     acc.limit(force);
     vel.addSelf(acc);
-    loc.addSelf(vel);
     vel.scale(speed);
+    loc.addSelf(vel);
   }
 }
 
