@@ -5,8 +5,6 @@ import toxi.math.*;
 import processing.opengl.*;
 import peasy.*;
 
-
-PFont font;
 PeasyCam cam;
 color[] colors;
 System system;
@@ -21,10 +19,7 @@ void setup()
   cam = new PeasyCam(this,700);
   cameraCenter = new Vec2D();
   gfx=new ToxiclibsSupport(this);
-  font = loadFont("DroidSans-12.vlw");
-  textFont(font);
   
-        textMode(SCREEN);
   // The colors for the organisms.
   colors = new color[6];
   colors[0] = color(39,233,29);
@@ -35,7 +30,7 @@ void setup()
   colors[5] = color(133,5,145);
   
   // Initialize the system
-  system = new System(1200, 80, 1.6);
+  system = new System(1200, 50, 1.6);
 }
 
 void draw()

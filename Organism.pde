@@ -13,6 +13,8 @@ class Organism
   float force;
   int age;
   int count;
+  int lonely = 10;
+  int crowded = 800;
 
   Organism(Vec2D _loc, color _c, float _alignment, float _clumping, float _separation, float _speed, float _force)
   {
@@ -45,7 +47,7 @@ class Organism
       Organism other = others.get(i);
       if (this != other)
       {
-        if (loc.distanceToSquared(other.loc) < system.radius)
+        if ( loc.distanceToSquared(other.loc) < system.radius )
         {
           steer.addSelf(other.vel);
           count++;
@@ -54,6 +56,10 @@ class Organism
     }
     if (count > 0)
     {
+      if ( count <= lonely || count >= crowded )
+      {
+        reset();
+      }
       steer.scaleSelf(1.0/count);
     }
     if (steer.magSquared()>0)
@@ -96,10 +102,10 @@ class Organism
     // Draw the current position
     point(loc.x, loc.y);
     // Draw the tail
-    // for (int i = 0; i < tail.length; i++)
-    // {
-    //   point(tail[i].x, tail[i].y);
-    // }
+    for (int i = 0; i < tail.length; i++)
+    {
+      point(tail[i].x, tail[i].y);
+    }
   }
 
 
@@ -107,7 +113,7 @@ class Organism
   {
     age = 0;
     loc.set(system.avg);
-    loc.addSelf(Vec2D.randomVector().scaleSelf(random(100)));
+    loc.addSelf(Vec2D.randomVector().scaleSelf(random(height*2/3)));
   }
 
   // run()
@@ -123,19 +129,19 @@ class Organism
   void update()
   {
     // Get to the next position in the tail.
-    //    if (count == tail.length-1) {
-    //      count = 0;
-    //    }
-    //    else {
-    //      count++;
-    //    }
-    //    tail[count].set(loc);
+    if (count == tail.length-1) {
+      count = 0;
+    }
+    else {
+      count++;
+    }
+    tail[count].set(loc);
     // increase the age of the organism
     age = constrain(age+1, 30, 225);
     // Limit acceleration, add to velocity, add to location.
     acc.limit(force);
     vel.addSelf(acc);
-    vel.scale(speed);
+    vel.limit(speed);
     loc.addSelf(vel);
   }
 }
