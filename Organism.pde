@@ -107,7 +107,7 @@ class Organism
   {
     age = 0;
     loc.set(system.avg);
-    loc.addSelf(Vec2D.randomVector().scaleSelf(100));
+    loc.addSelf(Vec2D.randomVector().scaleSelf(random(100)));
   }
 
   // run()
