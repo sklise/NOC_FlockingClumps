@@ -14,7 +14,7 @@ class Organism
   int age;
   int count;
   int lonely = 10;
-  int crowded = 800;
+  int crowded = 900;
 
   Organism(Vec2D _loc, color _c, float _alignment, float _clumping, float _separation, float _speed, float _force)
   {
