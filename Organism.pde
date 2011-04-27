@@ -13,8 +13,8 @@ class Organism
   float force;
   int age;
   int count;
-  int lonely = 10;
-  int crowded = 900;
+  int lonely = 100;
+  int crowded = 1100;
 
   Organism(Vec2D _loc, color _c, float _alignment, float _clumping, float _separation, float _speed, float _force)
   {
@@ -78,7 +78,7 @@ class Organism
     cohesion.subSelf(system.avg);
     float distanceFromCenter = cohesion.magnitude();
     cohesion.normalize();
-    cohesion.scaleSelf(-distanceFromCenter/ (system.radius * system.radius) );
+    cohesion.scaleSelf(-distanceFromCenter/ (system.radius*system.radius) );
     acc.addSelf(cohesion);
   }
 
@@ -98,7 +98,7 @@ class Organism
   {
     // Set the stroke opacity to the age of the organism.
     stroke(c, age);
-    strokeWeight(2);
+    strokeWeight(5);
     // Draw the current position
     point(loc.x, loc.y);
     // Draw the tail
@@ -137,7 +137,7 @@ class Organism
     }
     tail[count].set(loc);
     // increase the age of the organism
-    age = constrain(age+1, 50, 225);
+    age = constrain(age+1, 20, 255);
     // Limit acceleration, add to velocity, add to location.
     acc.limit(force);
     vel.addSelf(acc);
