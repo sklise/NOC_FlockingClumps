@@ -26,7 +26,7 @@ class Ripple
     acc.addSelf(offset.scaleSelf(.001));
     vel.addSelf(acc);
     loc.addSelf(vel);
-    stroke(c,70);
+    stroke(c,60);
     strokeWeight(1);
     noFill();
     ellipse(loc.x, loc.y, age, age);

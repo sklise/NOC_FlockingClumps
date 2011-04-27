@@ -13,8 +13,8 @@ class Organism
   float force;
   int age;
   int count;
-  int lonely = 100;
-  int crowded = 1100;
+  int lonely = 3;
+  int crowded = 100;
 
   Organism(Vec2D _loc, color _c, float _alignment, float _clumping, float _separation, float _speed, float _force)
   {
@@ -41,26 +41,18 @@ class Organism
   void applyAlignment(ArrayList<Organism> others)
   {
     Vec2D steer = new Vec2D();
-    int count = 0;
+    int neighbors = 0;
     for (int i = others.size()-1; i>=0; i--)
     {
       Organism other = others.get(i);
       if (this != other)
       {
-        if ( loc.distanceToSquared(other.loc) < system.radius )
+        if ( loc.distanceToSquared(other.loc) < system.radius*system.radius )
         {
           steer.addSelf(other.vel);
-          count++;
+          neighbors++;
         }
       }
-    }
-    if (count > 0)
-    {
-      if ( count <= lonely || count >= crowded )
-      {
-        reset();
-      }
-      steer.scaleSelf(1.0/count);
     }
     if (steer.magSquared()>0)
     { 
@@ -68,6 +60,15 @@ class Organism
       steer.subSelf(vel);
     }
     acc.addSelf(steer);
+
+    if ( neighbors <= lonely || neighbors >= crowded )
+    {
+      reset();
+    }
+    if (neighbors > 0)
+    {
+      steer.scaleSelf(1.0/count);
+    }
   }
 
   // Clumping and centering.
@@ -108,7 +109,6 @@ class Organism
     }
   }
 
-
   void reset()
   {
     age = 0;
@@ -116,11 +116,9 @@ class Organism
     loc.addSelf(Vec2D.randomVector().scaleSelf(random(height*2/3)));
     Vec2D temp = new Vec2D();
     temp.set(loc);
-    system.rips.add(new Ripple(temp,c));
+    system.rips.add(new Ripple(temp, c));
   }
 
-  // run()
-  // the only command necessary to move and draw an Organism.
   void run(ArrayList others)
   {
     acc.clear();

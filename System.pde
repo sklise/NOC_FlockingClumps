@@ -32,7 +32,6 @@ class System
     {
       avg.addSelf(o.loc);
     }
-
     avg.scaleSelf(1./orgs.size());
 
     for (Ripple r : rips)
@@ -41,7 +40,7 @@ class System
     }
     if (rips.size()>0)
     {
-      rips.remove(0);
+      rips.remove(0); // remove the first Ripple, these things are momentary.
     }
 
     for (int i = orgs.size()-1; i>=0; i--)

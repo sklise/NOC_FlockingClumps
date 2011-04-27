@@ -17,7 +17,7 @@ void setup()
   size(1280, 720, OPENGL);
   smooth();
   background(0);
-  cam = new PeasyCam(this, 1400);
+  cam = new PeasyCam(this, 1000);
   cameraCenter = new Vec2D();
   gfx=new ToxiclibsSupport(this);
   // The colors for the organisms.
@@ -30,7 +30,7 @@ void setup()
   colors[5] = color(255, 243, 86);
 
   // Initialize the system
-  system = new System(1200, 40, 3);
+  system = new System(1200, 50, 3);
 }
 
 void draw()
@@ -41,5 +41,4 @@ void draw()
 
   background(0);
   system.run();
-  println(frameRate);
 }
