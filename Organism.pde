@@ -1,10 +1,10 @@
 class Organism
 {
-  Vec3D loc;
-  Vec3D vel;
-  Vec3D acc;
-  Vec3D[] tail;
-  Vec3D loffset;
+  Vec2D loc;
+  Vec2D vel;
+  Vec2D acc;
+  Vec2D[] tail;
+  Vec2D loffset;
   color c;
   float alignment;
   float clumping;
@@ -16,23 +16,23 @@ class Organism
   int lonely = 100;
   int crowded = 1100;
 
-  Organism(Vec3D _loc, color _c, float _alignment, float _clumping, float _separation, float _speed, float _force)
+  Organism(Vec2D _loc, color _c, float _alignment, float _clumping, float _separation, float _speed, float _force)
   {
     loc = _loc;
-    vel = Vec3D.randomVector();
-    tail = new Vec3D[6];
-    acc = new Vec3D(0, 0, 0);
+    vel = Vec2D.randomVector();
+    tail = new Vec2D[6];
+    acc = new Vec2D(0, 0);
     c = _c;
     alignment = _alignment;
     clumping = _clumping;
     separation = _separation;
     speed = _speed;
     force = _force;
-    loffset = Vec3D.randomVector();
+    loffset = Vec2D.randomVector();
     age = 0;
     for (int i = 0; i< tail.length; i++)
     {
-      tail[i] = new Vec3D();
+      tail[i] = new Vec2D();
       tail[i].set(loc);
     }
     count = 0;
@@ -40,7 +40,7 @@ class Organism
 
   void applyAlignment(ArrayList<Organism> others)
   {
-    Vec3D steer = new Vec3D();
+    Vec2D steer = new Vec2D();
     int count = 0;
     for (int i = others.size()-1; i>=0; i--)
     {
@@ -73,7 +73,7 @@ class Organism
   // Clumping and centering.
   void applyCohesion()
   {
-    Vec3D cohesion = new Vec3D();
+    Vec2D cohesion = new Vec2D();
     cohesion.set(loc);
     cohesion.subSelf(system.avg);
     float distanceFromCenter = cohesion.magnitude();
@@ -85,10 +85,9 @@ class Organism
   void movement(ArrayList others)
   {
     // Add a bit of randomness.
-    Vec3D offset = new Vec3D(
+    Vec2D offset = new Vec2D(
     noise(loc.x/system.radius+system.offset.x+loffset.x*separation, loc.y/system.radius)-.5, 
-    noise(loc.x/system.radius, loc.y/system.radius+system.offset.y+loffset.y*separation)-.5,
-    noise(loc.x/system.radius, loc.y/system.radius, loc.z/system.radius+system.offset.y+loffset.y*separation)-.5);
+    noise(loc.x/system.radius, loc.y/system.radius+system.offset.y+loffset.y*separation)-.5);
     // Add the random movement
     acc.addSelf(offset.scaleSelf(separation));
     applyCohesion();
@@ -101,11 +100,11 @@ class Organism
     stroke(c, age);
     strokeWeight(5);
     // Draw the current position
-    point(loc.x, loc.y, loc.z);
+    point(loc.x, loc.y);
     // Draw the tail
     for (int i = 0; i < tail.length; i++)
     {
-      point(tail[i].x, tail[i].y, tail[i].z);
+      point(tail[i].x, tail[i].y);
     }
   }
 
@@ -114,8 +113,8 @@ class Organism
   {
     age = 0;
     loc.set(system.avg);
-    loc.addSelf(Vec3D.randomVector().scaleSelf(random(height*2/3)));
-    Vec3D temp = new Vec3D();
+    loc.addSelf(Vec2D.randomVector().scaleSelf(random(height*2/3)));
+    Vec2D temp = new Vec2D();
     temp.set(loc);
     system.rips.add(new Ripple(temp,c));
   }

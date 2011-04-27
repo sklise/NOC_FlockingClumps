@@ -10,7 +10,7 @@ PImage glow;
 color[] colors;
 System system;
 ToxiclibsSupport gfx;
-Vec3D cameraCenter; // keep the main amount of organisms in view
+Vec2D cameraCenter; // keep the main amount of organisms in view
 
 void setup()
 {
@@ -18,7 +18,7 @@ void setup()
   smooth();
   background(0);
   cam = new PeasyCam(this, 1400);
-  cameraCenter = new Vec3D();
+  cameraCenter = new Vec2D();
   gfx=new ToxiclibsSupport(this);
   // The colors for the organisms.
   colors = new color[6];
