@@ -30,7 +30,7 @@ void setup()
   colors[5] = color(255, 243, 86);
 
   // Initialize the system
-  system = new System(1600, 40, 3);
+  system = new System(1200, 40, 3);
 }
 
 void draw()

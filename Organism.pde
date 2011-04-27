@@ -114,6 +114,9 @@ class Organism
     age = 0;
     loc.set(system.avg);
     loc.addSelf(Vec2D.randomVector().scaleSelf(random(height*2/3)));
+    Vec2D temp = new Vec2D();
+    temp.set(loc);
+    system.rips.add(new Ripple(temp,c));
   }
 
   // run()

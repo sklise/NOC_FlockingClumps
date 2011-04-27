@@ -2,6 +2,7 @@ class System
 {
 
   ArrayList<Organism> orgs;
+  ArrayList<Ripple> rips;
   Vec2D avg; // average position of everyone.
   Vec2D offset;
   float radius;
@@ -15,7 +16,7 @@ class System
     avg = new Vec2D();
     offset = new Vec2D(1./3, 2./3);
     orgs = new ArrayList();
-    
+    rips = new ArrayList();
     // Populate the system
     for (int i = 0; i < pop; i++)
     {
@@ -33,6 +34,16 @@ class System
     }
     
     avg.scaleSelf(1./orgs.size());
+    
+    for(Ripple r : rips)
+    {
+      r.render();
+    }
+    println(frameCount%4);
+      if(rips.size()>0)
+      {
+        rips.remove(0);
+      }
     
     for (int i = orgs.size()-1; i>=0; i--)
     {
