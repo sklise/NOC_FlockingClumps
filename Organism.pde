@@ -137,7 +137,7 @@ class Organism
     }
     tail[count].set(loc);
     // increase the age of the organism
-    age = constrain(age+1, 30, 225);
+    age = constrain(age+1, 50, 225);
     // Limit acceleration, add to velocity, add to location.
     acc.limit(force);
     vel.addSelf(acc);

@@ -16,7 +16,7 @@ void setup()
   size(1280, 720, OPENGL);
   smooth();
   background(0);
-  cam = new PeasyCam(this,700);
+  cam = new PeasyCam(this,1100);
   cameraCenter = new Vec2D();
   gfx=new ToxiclibsSupport(this);
   
