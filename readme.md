@@ -1,9 +1,9 @@
-FINAL
+FlockingCLumps
 =====
 
-### System
+### Steven Klise <http://stevenklise.com>
+### Nature of Code, Spring 2011, ITP
+### Taught by Daniel Shiffman <http://shiffman.net>
 
-1. Inputs of population and radius
-2. Spawns n=population Organisms.
-3. Resets n=radius/100 Organisms each frame.
-4. 
+#### _FlockingClumps is an experiment of combining flocking behavoirs with cellular automaton like rules without discrete boundaries between organisms.
+ 
